@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Training Institute</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <nav>
+        <div>
+            <img src="https://tse2.mm.bing.net/th/id/OIP.bt6kygo5FnT9vJO8X8fhwQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="">
+            <h2>ABC Training Institute</h2>
+        </div>
+        <ol>
+            <li><a href="#box1">Home</a></li>
+            <li><a href="#box2"> Courses</a></li>
+            <li><a href="#box3">Schedule</a></li>
+            <li><a href="#box4">Register</a></li>
+        </ol>
+    </nav>
+    <div id="box1">
+        <div>
+                <h1>Welcome to ABC Training Institute</h1>
+        <hr>
+        <h3>Empowering Your Future with Quality Education</h3>
+        </div>
+    
+        <video src="./demo.mp4" controls autoplay muted id="vid">
+            
+        </video>
+    </div>
+    <div id="box2">
+        <h1>Our Courses</h1>
+        <hr>
+        <table >
+            <tr>
+                <th> <ul style="padding: 20px;"> <li>Web Development</li></ul></th>
+                    <th>
+                      <ul style="padding: 20px;"><li > Programming Languages </li></ul>
+                    </th>
+            </tr>
+            <tr>
+                <td><ul style="padding-left: 20px;"><li>HTML & CSS </li></ul>
+                </td>
+                <td><ul style="padding-left: 20px;"><li>Python </li></ul>
+                </td>
+            </tr>
+            <tr>
+                <td><ul style="padding-left: 20px;"><li>JavaScript </li></ul>
+                </td>
+                <td><ul style="padding-left: 20px;"><li>Java </li></ul>
+                </td>
+            </tr>
+            <tr>
+                <td><ul style="padding-left: 20px;"><li>React JS </li></ul>
+                </td>
+                <td><ul style="padding-left: 20px;"><li>C++ </li></ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="box3">
+        <h1>Course Schedule</h1>
+        <hr>
+        <table>
+            <thead>
+            <tr>
+            <th>Courses</td>
+            <th>Trainer</td>
+            <th>Duration</td>
+            <th>Mode</td>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>HTML & CSS</td>
+                <td>Ashoka</td>
+                <td>2 Weeks</td>
+                <td>Online</td>
+            </tr>
+            <tr>
+                <td>Java</td>
+                <td>Mr.Rahul</td>
+                <td>4 Weeks</td>
+                <td>Online</td>
+            </tr>
+            <tr><td>React JS</td>
+            <td>Mrs.Anita</td>
+            <td>3 Weeks</td>
+            <td>Offline</td></tr>
+            </tbody>
+            </table>
+    </div>
+    <div id="box4">
+        <h1>Student Registration</h1>
+        <hr>
+        
+        <form action="">
+            <fieldset>
+                <div>
+                     <label for="name">Name :</label>
+                <input type="text" placeholder="Enter your name" id="name">
+                </div>
+                <br>
+                  <div>
+                     <label for="email">Email :</label>
+                <input type="email" placeholder="Enter your email">
+                </div>
+                <br>
+                  <div>
+                     <label for="phone">Phone :</label>
+                <input type="tel"  placeholder="Enter your PhoneNo" id="phone">
+                </div> 
+                <br>
+                 <div>
+                     <label for="courses">Select Course :</label>
+                <select name="courses" id="courses">
+                    <option value="">----select from the below----</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="ReactJS">React JS</option>
+                    <option value="Python">Python</option>
+                    <option value="Java">Java</option>
+                    <option value="C++">C++</option>
+                    <option value="HTML&CSS">HTML & CSS</option>
+                </select>
+                </div>
+                <br>
+
+                  <div>
+                     <label for="gender">Gender : </label>
+                <input type="radio" name="gender" value="Male" id="Male"><label for="Male">Male</label>
+                 <input type="radio" name="gender" value="Female" id="Female"><label for="Female">Female</label>
+                  <input type="radio" name="gender" value="Others" id="Others"><label for="Others">Others</label>
+                </div>
+                <br>
+
+                  <div>
+                     <label for="message" >Message :</label>
+                     <textarea name="message" id="message"></textarea>
+                </div>
+                <br><br>
+                <div>
+                    <button type="submit" id="submit">Submit</button>
+                    <button type="reset" id="reset">Reset</button>
+                </div>
+               
+            </fieldset>
+        </form>
+    </div>
+    
+    
+</body>
+</html>

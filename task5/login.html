@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – ANU BLOG'S</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .logo h1 { font-size: 1.8rem; color: #667eea; letter-spacing: 1px; }
+    .logo p   { color: #888; font-size: 0.85rem; margin-top: 4px; }
+
+    h2 {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-group { margin-bottom: 16px; }
+    label { display: block; font-size: 0.82rem; font-weight: 600; color: #555; margin-bottom: 6px; }
+
+    input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    input:focus { border-color: #667eea; }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.9; }
+
+    .footer-link {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 0.88rem;
+      color: #666;
+    }
+    .footer-link a { color: #667eea; text-decoration: none; font-weight: 600; }
+    .footer-link a:hover { text-decoration: underline; }
+
+    .alert {
+      padding: 11px 14px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .alert.success { background: #e6f9f0; color: #1a7a4a; border: 1px solid #b2e8ce; }
+    .alert.error   { background: #fdecea; color: #c0392b; border: 1px solid #f5b7b1; }
+    .alert.show    { display: block; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo">
+    <h1>ANU BLOG'S</h1>
+    <p>Share your thoughts with the world</p>
+  </div>
+
+  <h2>Welcome Back</h2>
+
+  <div class="alert" id="alert"></div>
+
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Enter username" />
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter password" />
+  </div>
+
+  <button onclick="login()">Login</button>
+
+  <div class="footer-link">
+    Don't have an account? <a href="register.html">Register</a>
+  </div>
+</div>
+
+<script>
+  // Bonus: if already logged in, go home
+  if (localStorage.getItem('loggedInUser')) {
+    window.location.href = 'home.html';
+  }
+
+  function showAlert(msg, type) {
+    const el = document.getElementById('alert');
+    el.textContent = msg;
+    el.className = `alert ${type} show`;
+  }
+
+  function login() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!username || !password) {
+      showAlert('All fields are required.', 'error');
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+    // Bonus: prevent login without registration
+    if (users.length === 0) {
+      showAlert('No registered users found. Please register first.', 'error');
+      return;
+    }
+
+    const match = users.find(u => u.username === username && u.password === password);
+
+    if (match) {
+      localStorage.setItem('loggedInUser', username);
+      showAlert('Login successful! Redirecting…', 'success');
+      setTimeout(() => window.location.href = 'home.html', 1200);
+    } else {
+      showAlert('Invalid Username or Password.', 'error');
+    }
+  }
+
+  // Allow Enter key
+  document.addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+</script>
+</body>
+</html>

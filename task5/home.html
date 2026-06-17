@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home – ANU BLOG'S</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6fb;
+      min-height: 100vh;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      padding: 0 32px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .nav-brand { color: #fff; font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-user  { color: rgba(255,255,255,0.85); font-size: 0.9rem; }
+    .nav-user span { font-weight: 700; color: #fff; }
+
+    .btn-logout {
+      padding: 8px 18px;
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-logout:hover { background: rgba(255,255,255,0.32); }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+    .hero-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; color: #fff;
+      margin: 0 auto 20px;
+      box-shadow: 0 6px 20px rgba(102,126,234,0.4);
+    }
+    .hero h2 { font-size: 1.8rem; color: #333; }
+    .hero h2 span { color: #667eea; }
+    .hero p { color: #777; margin-top: 8px; font-size: 0.95rem; }
+
+    /* ── Cards ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+    .card h3 { font-size: 1.05rem; color: #333; margin-bottom: 6px; }
+    .card p  { font-size: 0.87rem; color: #888; line-height: 1.5; }
+
+    /* ── Alert ── */
+    .toast {
+      position: fixed;
+      bottom: 28px; left: 50%;
+      transform: translateX(-50%);
+      background: #1a7a4a;
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 999;
+    }
+    .toast.show { display: block; animation: fadeUp 0.3s ease; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translate(-50%, 12px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-brand">ANU BLOG'S</div>
+  <div class="nav-right">
+    <div class="nav-user">Logged in as <span id="navUsername"></span></div>
+    <button class="btn-logout" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-avatar">✍️</div>
+  <h2>Welcome, <span id="welcomeName"></span>!</h2>
+  <p>You're successfully logged in. Start exploring ANU BLOG'S.</p>
+</div>
+
+<!-- Feature Cards -->
+<div class="grid">
+  <div class="card">
+    <div class="card-icon">📝</div>
+    <h3>Write a Blog</h3>
+    <p>Share your ideas, stories, and expertise with our growing community of readers.</p>
+  </div>
+  <div class="card">
+    <div class="card-icon">🔍</div>
+    <h3>Explore Posts</h3>
+    <p>Discover trending articles and find topics that inspire and inform you every day.</p>
+  </div>
+  <div class="card">
+    <div class="card-icon">👤</div>
+    <h3>Your Profile</h3>
+    <p>Manage your account settings, bio, and keep track of your published content.</p>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // Bonus: restrict direct home page access
+  const loggedInUser = localStorage.getItem('loggedInUser');
+  if (!loggedInUser) {
+    alert('Please login to access this page.');
+    window.location.href = 'login.html';
+  }
+
+  document.getElementById('navUsername').textContent  = loggedInUser;
+  document.getElementById('welcomeName').textContent  = loggedInUser;
+
+  function logout() {
+    localStorage.removeItem('loggedInUser');
+    showToast('Logged out successfully!');
+    setTimeout(() => window.location.href = 'login.html', 1400);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  }
+</script>
+</body>
+</html>

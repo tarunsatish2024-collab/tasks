@@ -1,0 +1,21 @@
+body{
+    display: grid;
+    grid-template-columns: auto auto auto auto ;
+    background-color: black;
+    
+}
+
+    
+div{
+    width: 300px;
+    height: 200px;
+    margin: 10px;
+    padding:10px;
+    border-radius: 30px;
+    background-color: cornflowerblue;
+    transition: scale 3s;
+    text-align: center;
+}
+div:hover{
+   transform: scale(1.05,1.05);
+}
